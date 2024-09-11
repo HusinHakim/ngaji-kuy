@@ -79,7 +79,7 @@ Kelas : PBP C
 
 
 
-![Django Flow Chart](Django_Chart.jpg)
+![Django Flow Chart](django_chart.png)
 
 
 ### Fungsi git dalam pengembangan perangkat lunak

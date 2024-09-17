@@ -1,8 +1,47 @@
-<h1>Tugas 2</h1>
+{% extends 'base.html' %}
+{% block content %}
+<h1>Ngaji Kuy</h1>
 
-<h5>Nama Aplikasi: </h5>
+<h5>Nama_Aplikasi: </h5>
 <p>{{ Nama_Aplikasi }}<p>
-<h5>Nama: </h5>
-<p>{{ Name }}<p>
-<h5>Class: </h5>
-<p>{{ Class }}<p>
+
+<h5>Name:</h5>
+<p>{{ name }}</p>
+
+<h5>Class:</h5>
+<p>{{ class }}</p>
+
+{% if not quran_entries %}
+<p>Belum ada data pemesanan pada ngaji kuy.</p>
+{% else %}
+<table>
+  <tr>
+    <th>Nama Quran</th>
+    <th>Price</th>
+    <th>Description</th>
+    <th>Publisher</th>
+    <th>Stock</th>
+    <th>Type</th>
+  </tr>
+
+ 
+  {% for quran_entry in quran_entries %}
+  <tr>
+    <td>{{quran_entry.name}}</td>
+    <td>{{quran_entry.price}}</td>
+    <td>{{quran_entry.description}}</td>
+    <td>{{quran_entry.publisher}}</td>
+    <td>{{quran_entry.stock}}</td>
+    <td>{{quran_entry.type}}</td>
+  </tr>
+  {% endfor %}
+</table>
+{% endif %}
+
+<br />
+
+<a href="{% url 'main:create_mood_entry' %}">
+  <button>Add New Mood Entry</button>
+</a>
+
+{% endblock content %}

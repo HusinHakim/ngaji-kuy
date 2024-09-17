@@ -1,15 +1,17 @@
 from django.db import models
+import uuid
 
 class Quran(models.Model):
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)  # tambahkan baris ini
     name = models.CharField(max_length=255)
     price = models.IntegerField(default=0)
-    description = models.TextField()
-    stock = models.IntegerField(default=0) # stock quran yang tersedia
-    publisher = models.CharField(max_length=255) # penerbit quran
-    type = models.CharField(max_length=255) # jenis quran (quran tafsir atau quran terjemahan)
-    discount = models.DecimalField(max_digits=5, decimal_places=2, default=0.00) # diskon quran
-
+    description = models.TextField()    
+    stock = models.IntegerField(default=2) # stock quran yang tersedia
+    publisher = models.CharField(max_length=255, default="No Publisher") # penerbit quran
+    type = models.CharField(max_length=255, default="Tafsir") # jenis quran (quran tafsir atau quran terjemahan)
+    
 
     @property
     def is_in_stock(self):
         return self.stock > 0
+    

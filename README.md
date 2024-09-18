@@ -333,13 +333,13 @@ Dengan menambahkan csrf_token, Django memastikan bahwa setiap permintaan form ha
 
 ### Screenshot Postman
 #### JSON
-![JSON](photo\JSON.png)
+![JSON](JSON.png)
 
 #### XML
-![XML](photo\XML.png) 
+![XML](XML.png) 
 
 #### JSON with ID
-![JSON_ID](photo\JSONID.png) 
+![JSON_ID](JSONID.png) 
 
 #### XML with ID
-![XML_ID](photo\XMLID.png)
+![XML_ID](XMLID.png)

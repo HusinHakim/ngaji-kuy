@@ -124,3 +124,5 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 CSRF_TRUSTED_ORIGINS = ["http://localhost","http://127.0.0.1","http://husin-hidayatul-ngajikuy.pbp.cs.ui.ac.id", "https://husin-hidayatul-ngajikuy.pbp.cs.ui.ac.id"]
+
+# Tambahkan baris ini

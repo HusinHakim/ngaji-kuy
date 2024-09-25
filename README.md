@@ -103,7 +103,7 @@ Model di Django disebut ORM (Object-Relational Mapping) karena berperan sebagai 
 
 Nama : Husin Hidayatu Hakim
 
-NPM : 2306162222
+NPM : 2306152481
 
 Kelas : PBP C
 
@@ -343,3 +343,155 @@ Dengan menambahkan csrf_token, Django memastikan bahwa setiap permintaan form ha
 
 #### XML with ID
 <img src="https://i.ibb.co.com/ggBSRR7/XMLID.png" alt="XMLID" border="0">
+
+
+Nama : Husin Hidayatu Hakim
+
+NPM : 2306162222
+
+Kelas : PBP C
+
+## Tugas 4
+
+## Jawaban Pertanyaan
+### 1. Apa perbedaan antara HttpResponseRedirect() dan redirect()?
+`HttpResponseRedirect()` membutuhkan URL lengkap sebagai argumen, sedangkan `redirect()` lebih fleksibel, bisa menerima nama view atau model dan otomatis mengarahkan ke URL yang benar.
+
+### 2. Jelaskan cara kerja penghubungan model Product dengan User!
+Model `Product` dihubungkan dengan `User` melalui `ForeignKey`. Hal ini memungkinkan setiap produk terkait dengan satu pengguna, dan produk dapat difilter berdasarkan pengguna yang sedang login.
+
+### 3. Apa perbedaan antara authentication dan authorization?
+`Authentication` memverifikasi identitas pengguna, sedangkan `authorization` menentukan apa yang diizinkan untuk dilakukan oleh pengguna tersebut. Django mengelola keduanya melalui modul `auth`, dengan `authentication` menggunakan `login()` dan `authorization` melalui sistem perizinan.
+
+### 4. Bagaimana Django mengingat pengguna yang telah login?
+Django menggunakan session untuk mengingat pengguna yang login. Informasi sesi disimpan di sisi server dan referensi sesi (ID sesi) disimpan di cookies pengguna. Cookies dapat digunakan untuk menyimpan informasi seperti waktu login terakhir.
+## Checklist Implementasi
+
+### 1. Membuat Fungsi Registrasi, Login, dan Logout
+#### Registrasi
+Fungsi registrasi menggunakan `UserCreationForm` dari Django yang sudah tersedia, untuk memudahkan pembuatan pengguna baru. Formulir ini akan divalidasi dan, jika berhasil, akun pengguna akan dibuat.
+
+```python
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib import messages
+
+def register(request):
+    form = UserCreationForm()
+
+    if request.method == "POST":
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Your account has been successfully created!')
+            return redirect('main:login')
+    context = {'form':form}
+    return render(request, 'register.html', context)
+
+```
+Tampilan HTML `register.html` juga dibuat untuk mengakomodasi form pendaftaran.
+
+#### Login
+Fungsi login menggunakan `AuthenticationForm` dan `login()` untuk memvalidasi kredensial pengguna. Jika valid, pengguna akan diarahkan ke halaman utama.
+
+```python
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.forms import AuthenticationForm
+
+def login_user(request):
+   if request.method == 'POST':
+      form = AuthenticationForm(data=request.POST)
+
+      if form is_valid():
+        user = form.get_user()
+        login(request, user)
+        response = HttpResponseRedirect(reverse("main:show_main"))
+        response.set_cookie('last_login', str(datetime.datetime.now()))
+        return response
+
+   else:
+      form = AuthenticationForm(request)
+   context = {'form': form}
+   return render(request, 'login.html', context)
+```
+
+#### Logout
+Fungsi logout menggunakan `logout()` untuk mengakhiri sesi pengguna dan menghapus informasi `last_login` dari cookies.
+
+```python
+from django.contrib.auth import logout
+
+def logout_user(request):
+    logout(request)
+    response = HttpResponseRedirect(reverse('main:login'))
+    response.delete_cookie('last_login')
+    return response
+```
+
+### 2. Menghubungkan Model `Product` dengan `User`
+Untuk menghubungkan model `Product` dengan `User`, kita perlu menggunakan `ForeignKey` di model `Product`. Hal ini memungkinkan setiap produk terkait dengan satu pengguna.
+
+```python
+from django.contrib.auth.models import User
+from django.db import models
+
+class Quran(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)  
+    name = models.CharField(max_length=255)
+    price = models.IntegerField(default=0)
+```
+
+Setelah itu, `Product` bisa difilter berdasarkan pengguna yang login untuk menampilkan hanya produk yang mereka buat.
+
+```python
+def show_main(request):
+    quran_entries = Quran.objects.filter(user=request.user)
+    context = {
+        'Nama_Aplikasi' : "Ngaji Kuy",
+        'name': request.user.username,
+        'Class' : "PBP C",
+        'quran_entries': quran_entries,
+        'last_login': request.COOKIES['last_login'],
+    }
+
+    return render(request, "main.html", context)
+```
+
+### 3. Menampilkan Detail Pengguna yang Sedang Login dan Menggunakan Cookies
+Informasi login terakhir dapat disimpan dalam cookies dengan menambahkan `last_login` saat pengguna berhasil login. Pada halaman utama, kita bisa menampilkan waktu login terakhir tersebut.
+
+```python
+from django.utils import timezone
+from django.http import HttpResponseRedirect
+
+def login_user(request):
+   if request.method == 'POST':
+      form = AuthenticationForm(data=request.POST)
+
+      if form.is_valid():
+        user = form.get_user()
+        login(request, user)
+        response = HttpResponseRedirect(reverse("main:show_main"))
+        response.set_cookie('last_login', str(datetime.datetime.now()))
+        return response
+
+   else:
+      form = AuthenticationForm(request)
+   context = {'form': form}
+   return render(request, 'login.html', context)
+```
+
+Pada halaman utama (`main.html`), tambahkan kode berikut untuk menampilkan waktu login terakhir:
+```html
+<h5>Sesi terakhir login: {{ last_login }}</h5>
+```
+
+### 4. Deployment ke PWS
+Setelah mengimplementasikan aplikasi Django, langkah selanjutnya adalah melakukan deployment ke Pacil Web Service (PWS). Pastikan konfigurasi di `settings.py` sudah benar, dan tambahkan host `localhost` serta URL PWS ke `ALLOWED_HOSTS`.
+
+```python
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'husin-hidayatul-ngajikuy.pbp.cs.ui.ac.id']
+```
+
+## Kesimpulan
+Dengan mengikuti langkah-langkah di atas, kita dapat mengimplementasikan autentikasi, session, dan cookies di aplikasi Django, serta memastikan bahwa aplikasi tersebut aman dan bisa digunakan dengan baik. Proses deployment ke PWS memungkinkan aplikasi ini diakses oleh pengguna melalui internet.

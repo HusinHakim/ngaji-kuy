@@ -493,5 +493,3 @@ Setelah mengimplementasikan aplikasi Django, langkah selanjutnya adalah melakuka
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'husin-hidayatul-ngajikuy.pbp.cs.ui.ac.id']
 ```
 
-## Kesimpulan
-Dengan mengikuti langkah-langkah di atas, kita dapat mengimplementasikan autentikasi, session, dan cookies di aplikasi Django, serta memastikan bahwa aplikasi tersebut aman dan bisa digunakan dengan baik. Proses deployment ke PWS memungkinkan aplikasi ini diakses oleh pengguna melalui internet.

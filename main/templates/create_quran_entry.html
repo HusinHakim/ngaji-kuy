@@ -1,18 +1,37 @@
-{% extends 'base.html' %} 
-{% block content %}
-<h1>Add New Quran</h1>
+{% extends 'base.html' %}
+{% load static %}
+{% block meta %}
+<title>Tambah Produk Al-Quran</title>
+{% endblock meta %}
 
-<form method="POST">
-  {% csrf_token %}
-  <table>
-    {{ form.as_table }}
-    <tr>
-      <td></td>
-      <td>
-        <input type="submit" value="Add Quran" />
-      </td>
-    </tr>
-  </table>
-</form>
+{% block content %}
+{% include 'navbar.html' %}
+
+<div class="container">
+  <div class="form-container">
+    <h1 class="text-center mt-4 mb-4">Tambah Produk Al-Quran</h1>
+
+    <div class="form-wrapper">
+      <form method="POST" action="">
+        {% csrf_token %}
+        {% for field in form %}
+          <div class="form-group">
+            <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+            {{ field }}
+            {% if field.help_text %}
+              <p class="form-help">{{ field.help_text }}</p>
+            {% endif %}
+            {% for error in field.errors %}
+              <p class="form-error">{{ error }}</p>
+            {% endfor %}
+          </div>
+        {% endfor %}
+        <div class="form-actions text-center">
+          <button type="submit" class="button">Tambah Produk</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
 
 {% endblock %}

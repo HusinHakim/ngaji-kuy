@@ -1,0 +1,33 @@
+{% load static %}
+{% load humanize %}
+
+<div class="card">
+    <!-- Detail Produk -->
+    <div class="card-content">
+        <h3 class="card-title">{{ quran_entry.name }}</h3>
+        <p class="card-price">Rp {{ quran_entry.price|intcomma }}</p>
+        <p class="card-description">{{ quran_entry.description|truncatewords:20 }}</p>
+        <p class="card-details">
+            {% if quran_entry.is_in_stock %}
+                <span class="in-stock">Stok tersedia ({{ quran_entry.stock }})</span>
+            {% else %}
+                <span class="out-of-stock">Stok habis</span>
+            {% endif %}
+        </p>
+        <p class="card-details">Penerbit: {{ quran_entry.publisher }}</p>
+        <p class="card-details">Jenis: {{ quran_entry.type }}</p>
+    </div>
+
+    <!-- Aksi Kartu -->
+    <div class="card-actions">
+        <!-- Tombol Edit -->
+        <a href="{% url 'main:edit_quran' quran_entry.id %}" class="button-edit" title="Edit">
+            <i class="fas fa-edit"></i> Edit
+        </a>
+
+        <!-- Tombol Delete -->
+        <a href="{% url 'main:delete_quran' quran_entry.id %}" class="button-delete" title="Delete">
+            <i class="fas fa-trash-alt"></i> Delete
+        </a>
+    </div>
+</div>

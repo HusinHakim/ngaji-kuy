@@ -1,0 +1,371 @@
+global.css
+
+/* Warna Tema dan Variabel */
+:root {
+    --green-dark: #1a312c;
+    --green-medium: #485d58;
+    --green-light: #1f5c4d;
+    --yellow: #ffcc00;
+    --beige: #f5f5dc;
+    --brown: #8b4513;
+    --brown-dark: #5a3314;
+    --white: #ffffff;
+    --text-dark: #333333;
+    --text-gray: #777777;
+    --text-white: #ffffff;
+}
+
+
+/* Reset Margin dan Padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Gaya Dasar Body */
+body {
+    background-color: var(--green-dark);
+    color: var(--text-white);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #485d58; /* Hijau tua */
+    color: #ffffff;
+    padding: 10px 20px;
+  }
+  
+  .navbar-left h1 {
+    margin: 0;
+  }
+  
+  .navbar a {
+    color: #ffffff;
+    text-decoration: none;
+  }
+  
+  .navbar a:hover {
+    color: #ffcc00; /* Warna oranye untuk hover */
+  }
+  
+  /* Navigation Links */
+  .nav-link {
+    margin: 0 10px;
+  }
+  
+  /* Mobile Navigation Links */
+  .nav-link-mobile {
+    color: #ffffff;
+    padding: 10px 0;
+    text-decoration: none;
+  }
+  
+  .nav-link-mobile:hover {
+    color: #ffcc00;
+  }
+  
+  /* Credentials */
+  .credentials p {
+    margin: 0;
+    color: #ffffff;
+  }
+  
+  .credentials span {
+    font-weight: bold;
+  }
+  
+  /* Logout Button */
+  .logout-button {
+    background-color: transparent;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+    padding: 6px 12px;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  
+  .logout-button:hover {
+    background-color: #ffcc00;
+    color: #1a312c;
+    border-color: #ffcc00;
+  }
+  
+  /* Button */
+  .button {
+    background-color: #1f5c4d; /* Hijau lebih terang */
+    color: #ffffff;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+  }
+  
+  .button:hover {
+    background-color: #ffcc00;
+    color: #1a312c;
+    transition: 0.3s;
+  }
+  
+  /* Mobile Menu */
+  .mobile-menu {
+    background-color: #485d58;
+  }
+  
+  .mobile-menu a {
+    display: block;
+    color: #ffffff;
+    padding: 10px 0;
+    text-decoration: none;
+  }
+  
+  .mobile-menu a:hover {
+    color: #ffcc00;
+  }
+  
+
+/* Kartu Produk */
+.card {
+    background-color: var(--beige);
+    border: 1px solid var(--brown);
+    border-radius: 8px;
+    padding: 20px;
+    color: var(--text-dark);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+}
+
+.card-title {
+    color: var(--brown-dark);
+    margin-top: 0;
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.card-price {
+    color: var(--brown-dark);
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.card-description, .card-details {
+    color: var(--text-dark);
+    margin-bottom: 10px;
+}
+
+.card-details {
+    font-size: 0.9em;
+}
+
+.in-stock {
+    color: #27ae60; /* Hijau untuk stok tersedia */
+}
+
+.out-of-stock {
+    color: #e74c3c; /* Merah untuk stok habis */
+}
+
+.card-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.button-edit, .button-delete {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: #555555;
+    font-size: 1.2em;
+    transition: color 0.3s;
+    text-decoration: none;
+}
+
+.button-edit:hover {
+    color: #2980b9; /* Biru saat hover */
+}
+
+.button-delete:hover {
+    color: #e74c3c; /* Merah saat hover */
+}
+
+/* Kontainer */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px; /* Menambahkan padding kiri dan kanan */
+}
+
+/* Utility Classes */
+.text-center {
+    text-align: center;
+}
+
+.mt-4 {
+    margin-top: 16px;
+}
+
+.mb-4 {
+    margin-bottom: 16px;
+}
+
+.text-right {
+    text-align: right;
+}
+
+/* Kolom untuk Kartu */
+/* Updated Kolom untuk Kartu */
+.columns {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 20px;
+}
+
+.column {
+    flex: 1 1 calc(33.333% - 20px);
+    max-width: calc(33.333% - 20px);
+    box-sizing: border-box;
+}
+
+
+@media screen and (max-width: 768px) {
+    .column {
+        flex: 1 1 calc(48% - 20px);
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .column {
+        flex: 1 1 100%;
+    }
+}
+
+
+/* Tambahan untuk Kartu Produk */
+
+
+.card-content p {
+    margin-bottom: 8px;
+}
+
+/* Tambahan untuk Tombol dalam Kartu */
+.card-actions a {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 4px;
+}
+
+.button-edit {
+    color: #2980b9;
+}
+
+.button-delete {
+    color: #e74c3c;
+}
+
+.button-edit:hover {
+    background-color: rgba(41, 128, 185, 0.1);
+}
+
+.button-delete:hover {
+    background-color: rgba(231, 76, 60, 0.1);
+}
+
+/* Styling untuk Formulir Login dan Registrasi */
+.login-form {
+    max-width: 400px;
+    margin: 40px auto;
+    padding: 20px;
+    background-color: var(--beige);
+    border: 1px solid var(--brown);
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.login-form h2 {
+    color: var(--brown-dark);
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    color: var(--brown-dark);
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid var(--brown);
+    border-radius: 4px;
+    font-size: 16px;
+    color: var(--text-dark);
+}
+
+.form-group input::placeholder {
+    color: var(--text-gray);
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--green-medium);
+    box-shadow: 0 0 5px rgba(72, 93, 88, 0.5);
+}
+
+.form-actions {
+    margin-top: 20px;
+}
+
+.form-actions .button {
+    width: 100%;
+}
+
+.login-footer p {
+    color: var(--text-dark);
+}
+
+.login-footer p a {
+    color: var(--green-light);
+    text-decoration: none;
+}
+
+.login-footer p a:hover {
+    color: var(--yellow);
+}
+
+.alert {
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    color: var(--text-dark);
+}
+
+.alert-success {
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+}
+
+.alert-error {
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+}
+
+.alert-info {
+    background-color: #d1ecf1;
+    border: 1px solid #bee5eb;
+}

@@ -1,0 +1,84 @@
+{% load static %}
+<nav class="navbar">
+  <div class="flex items-center justify-between h-16">
+    <!-- Logo/Brand -->
+    <div class="navbar-left flex items-center">
+      <h1 class="text-2xl font-extrabold tracking-wide">Ngaji Kuy</h1>
+    </div>
+
+    <!-- Navigation Links -->
+    <div class="navbar-center hidden md:flex items-center space-x-4">
+      <a href="{% url 'main:show_main' %}" class="nav-link">Home</a>
+      <a href="#" class="nav-link">Tentang Kami</a>
+      <a href="#" class="nav-link">Kontak</a>
+    </div>
+
+    <!-- User Credentials and Logout Button -->
+    <div class="navbar-right hidden md:flex items-center space-x-4">
+      {% if user.is_authenticated %}
+        <!-- Credentials displayed horizontally -->
+        <div class="credentials flex items-center space-x-4">
+          <p class="text-sm">NPM: <span class="font-semibold">2306152481</span></p>
+          <p class="text-sm">Nama: <span class="font-semibold">Husin</span></p>
+          <p class="text-sm">Kelas: <span class="font-semibold">D</span></p>
+        </div>
+        
+        <!-- Logout Button -->
+        <a href="{% url 'main:logout' %}" class="logout-button">
+          Logout
+        </a>
+      {% else %}
+        <a href="{% url 'main:login' %}" class="button">
+          Login
+        </a>
+        <a href="{% url 'main:register' %}" class="button">
+          Register
+        </a>
+      {% endif %}
+    </div>
+
+    <!-- Mobile Menu Button -->
+    <div class="md:hidden flex items-center">
+      <button class="mobile-menu-button">
+        <svg class="w-8 h-8 text-white" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+             viewBox="0 0 24 24" stroke="currentColor">
+          <path d="M4 6h16M4 12h16M4 18h16"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div class="mobile-menu hidden md:hidden px-4 w-full">
+    <!-- Navigation Links for Mobile -->
+    <a href="{% url 'main:show_main' %}" class="block nav-link-mobile">Home</a>
+    <a href="#" class="block nav-link-mobile">Tentang Kami</a>
+    <a href="#" class="block nav-link-mobile">Kontak</a>
+    {% if user.is_authenticated %}
+      <!-- Credentials displayed vertically on mobile -->
+      <div class="text-gray-300 text-center mt-4">
+        <p class="text-sm">NPM: <span class="font-semibold">{{ user.npm }}</span></p>
+        <p class="text-sm">Nama: <span class="font-semibold">{{ user.first_name }} {{ user.last_name }}</span></p>
+        <p class="text-sm">Kelas: <span class="font-semibold">{{ user.kelas }}</span></p>
+      </div>
+      <a href="{% url 'main:logout' %}" class="block text-center logout-button mt-2">
+        Logout
+      </a>
+    {% else %}
+      <a href="{% url 'main:login' %}" class="block text-center button mt-2">
+        Login
+      </a>
+      <a href="{% url 'main:register' %}" class="block text-center button mt-2">
+        Register
+      </a>
+    {% endif %}
+  </div>
+
+  <script>
+    const btn = document.querySelector("button.mobile-menu-button");
+    const menu = document.querySelector(".mobile-menu");
+    btn.addEventListener("click", () => {
+      menu.classList.toggle("hidden");
+    });
+  </script>
+</nav>

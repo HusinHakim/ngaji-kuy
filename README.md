@@ -345,11 +345,11 @@ Dengan menambahkan csrf_token, Django memastikan bahwa setiap permintaan form ha
 <img src="https://i.ibb.co.com/ggBSRR7/XMLID.png" alt="XMLID" border="0">
 
 
-Nama : Husin Hidayatu Hakim
+Nama : Husin Hidayatul Hakim
 
-NPM : 2306162222
+NPM : 23016152481
 
-Kelas : PBP C
+Kelas : PBP D
 
 ## Tugas 4
 
@@ -493,3 +493,133 @@ Setelah mengimplementasikan aplikasi Django, langkah selanjutnya adalah melakuka
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'husin-hidayatul-ngajikuy.pbp.cs.ui.ac.id']
 ```
 
+
+## Tugas 4: Menjawab Pertanyaan Seputar CSS dan Responsive Design
+
+### 1. Urutan Prioritas CSS Selector
+
+Pada CSS, prioritas selector menentukan aturan mana yang diterapkan jika terdapat beberapa selector untuk elemen yang sama. Urutan prioritas dari yang terendah hingga tertinggi adalah:
+
+1. **Selector Tag (Elemen HTML):** Contoh `h1`, `p`, `div`.
+2. **Selector Class:** Contoh `.class-name`.
+3. **Selector Attribute dan Pseudo-class:** Contoh `[type="text"]`, `:hover`.
+4. **Selector ID:** Contoh `#id-name`.
+5. **Inline Style:** Gaya yang ditulis langsung pada elemen HTML, misalnya `style="color: blue;"`.
+6. **Aturan dengan `!important`:** Contoh `color: red !important;`, memiliki prioritas tertinggi dan mengesampingkan aturan lainnya.
+
+Jika ada konflik, selector dengan prioritas lebih tinggi akan diterapkan. Jika prioritasnya sama, selector yang ditulis terakhir dalam CSS akan digunakan.
+
+---
+
+### 2. Pentingnya Responsive Design
+
+**Responsive design** penting karena memungkinkan tampilan dan fungsi website beradaptasi dengan berbagai ukuran layar dan perangkat, seperti desktop, tablet, dan smartphone. Ini memastikan pengalaman pengguna yang optimal tanpa memerlukan zoom atau scroll berlebihan.
+
+**Contoh aplikasi yang sudah menerapkan responsive design:**
+
+- **Google**
+- **Tokopedia**
+- **Tiket.com**
+
+**Contoh aplikasi yang belum menerapkan responsive design:**
+
+- **SiakNG**
+- **Beberapa situs web lama yang tidak dioptimalkan untuk perangkat mobile**
+
+---
+
+### 3. Perbedaan Margin, Border, dan Padding
+
+- **Margin:** Ruang di luar elemen yang memisahkan elemen tersebut dengan elemen lain.
+  - **Implementasi:** `margin: 20px;` (mengatur margin di semua sisi).
+  
+- **Border:** Garis yang mengelilingi elemen, berada di antara margin dan padding.
+  - **Implementasi:** `border: 2px solid black;` (mengatur ketebalan, jenis garis, dan warna).
+  
+- **Padding:** Ruang di dalam elemen antara konten dan border.
+  - **Implementasi:** `padding: 10px;` (mengatur padding di semua sisi).
+
+---
+
+### 4. Konsep Flexbox dan Grid Layout
+
+- **Flexbox (Flexible Box):**
+  - **Definisi:** Metode layout satu dimensi dalam CSS untuk mengatur elemen secara fleksibel dalam baris atau kolom.
+  - **Kegunaan:**
+    - Memudahkan penataan dan alignment elemen secara horizontal atau vertikal.
+    - Mengatur spacing dan distribusi ruang antar elemen.
+  - **Contoh Implementasi:**
+
+    ```css
+    .flex-container {
+      display: flex;
+      flex-direction: row; /* atau column */
+      justify-content: space-between;
+      align-items: center;
+    }
+    ```
+
+- **Grid Layout:**
+  - **Definisi:** Sistem layout dua dimensi dalam CSS yang memungkinkan pengaturan elemen dalam baris dan kolom.
+  - **Kegunaan:**
+    - Membuat tata letak halaman yang kompleks dan terstruktur.
+    - Mengatur ukuran dan posisi elemen dengan presisi.
+  - **Contoh Implementasi:**
+
+    ```css
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 10px;
+    }
+    ```
+
+    
+
+---
+## 5. Implementasi Checklist Secara Step-by-Step
+
+### a. Implementasi Fungsi Hapus dan Edit Product
+
+Untuk menambahkan fitur mengedit dan menghapus produk, langkah-langkahnya adalah sebagai berikut:
+
+1. **Menambahkan Method pada `views.py`:** Saya membuat method `edit_product` dan `delete_product` di `views.py` untuk mengelola logika edit dan hapus produk.
+2. **Menambahkan Path pada `urls.py`:** Saya kemudian menambahkan routing atau path yang sesuai di `urls.py`, sehingga request untuk mengedit dan menghapus produk bisa diarahkan ke method yang tepat.
+3. **Membuat Template Edit:** Saya membuat file `edit_quran.html` di dalam folder `main/templates` untuk mengatur tampilan halaman pengeditan produk.
+
+### b. Kustomisasi Halaman Login, Register, dan Tambah Produk
+
+Untuk membuat halaman login, register, dan tambah produk lebih menarik:
+
+1. **Menggunakan Tailwind CSS:** Saya memanfaatkan framework Tailwind CSS untuk memberikan gaya yang menarik dan responsif pada halaman login, register, dan halaman tambah produk (`create_quran_entry.html`).
+2. **Kustomisasi UI:** Saya fokus pada penggunaan komponen Tailwind yang modern dan minimalis, memastikan elemen-elemen UI teratur dan nyaman dilihat.
+
+### c. Menampilkan Gambar dan Pesan Ketika Tidak Ada Produk Terdaftar
+
+Agar halaman menampilkan gambar dan pesan saat tidak ada produk yang terdaftar:
+
+1. **Mengecek Daftar Produk:** Saya menambahkan pengecekan di dalam template untuk memeriksa apakah terdapat produk yang terdaftar melalui `Quran.objects.filter(user=request.user)`.
+2. **Menampilkan Gambar Default:** Jika tidak ada produk, saya menampilkan gambar default yang diambil dari folder `static` beserta pesan "Belum ada produk terdaftar" sebagai pengganti daftar produk.
+
+### d. Menampilkan Daftar Produk dalam Bentuk Card
+
+Jika ada produk yang tersimpan, maka halaman produk akan menampilkan produk-produk tersebut dalam bentuk card:
+
+1. **Mengecek Daftar Produk:** Sama seperti sebelumnya, saya mengecek apakah terdapat produk yang disimpan menggunakan query `Quran.objects.filter(user=request.user)`.
+2. **Menampilkan Produk dengan Card:** Jika ada produk, saya menampilkan detail setiap produk dalam bentuk card menggunakan template `card_quran.html`, yang saya desain sendiri.
+
+### e. Menambahkan Tombol Edit dan Hapus pada Setiap Card Produk
+
+Untuk setiap produk yang ditampilkan dalam card, saya menambahkan dua tombol:
+
+1. **Implementasi Tombol:** Saya menambahkan tombol untuk mengedit dan menghapus produk, yang masing-masing terhubung dengan fungsi `edit_product` dan `delete_product`.
+
+
+### f. Membuat Navigation Bar yang Responsif
+
+Untuk membuat navbar yang responsif terhadap berbagai ukuran perangkat, terutama mobile dan desktop:
+
+1. **Membuat `navbar.html`:** Saya membuat file `navbar.html` untuk menampilkan fitur-fitur utama aplikasi, seperti home, daftar produk, dan logout.
+2. **Responsivitas:** Saya menambahkan kelas-kelas Tailwind untuk menampilkan tampilan yang berbeda pada perangkat mobile dengan menggunakan `<div class="mobile-menu hidden ...>`. Ini memastikan navbar bisa berubah tampilan ketika dilihat dari perangkat mobile, sehingga tetap mudah digunakan di berbagai ukuran layar.
+
+---

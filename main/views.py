@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from main.forms import QuranForm
 from main.models import Quran
 from django.http import HttpResponse
@@ -13,8 +13,9 @@ import datetime
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
+
 @login_required(login_url='/login')
-def show_main(request):
+def show_main(request): 
     quran_entries = Quran.objects.filter(user=request.user)
     context = {
         'Nama_Aplikasi' : "Ngaji Kuy",
@@ -88,3 +89,26 @@ def logout_user(request):
     response = HttpResponseRedirect(reverse('main:login'))
     response.delete_cookie('last_login')
     return response
+
+def edit_quran(request, id):
+    # Get quran entry berdasarkan id
+    quran = Quran.objects.get(pk = id)
+
+    # Set quran entry sebagai instance dari form
+    form = QuranForm(request.POST or None, instance=quran)
+
+    if form.is_valid() and request.method == "POST":
+        # Simpan form dan kembali ke halaman awal
+        form.save()
+        return HttpResponseRedirect(reverse('main:show_main'))
+
+    context = {'form': form}
+    return render(request, "edit_quran.html", context)
+
+def delete_quran(request, id):
+    # Get quran berdasarkan id
+    quran = Quran.objects.get(pk = id)
+    # Hapus quran
+    quran.delete()
+    # Kembali ke halaman awal
+    return HttpResponseRedirect(reverse('main:show_main'))

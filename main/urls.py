@@ -3,13 +3,14 @@ from main.views import show_main, create_quran_entry, show_xml, show_json, show_
 from main.views import register
 from main.views import login_user
 from main.views import logout_user
-
+from main.views import edit_quran
+from main.views import delete_quran
 app_name = 'main'
 
 
 urlpatterns = [
     path('', show_main, name='show_main'),
-    path('create-mood-entry', create_quran_entry, name='create_mood_entry'),
+    path('create-quran-entry', create_quran_entry, name='create_quran_entry'),
     path('xml/', show_xml, name='show_xml'),
     path('json/', show_json, name='show_json'),
     path('xml/<str:id>/', show_xml_by_id, name='show_xml_by_id'),
@@ -17,4 +18,6 @@ urlpatterns = [
     path('register/', register, name='register'),
     path('login/', login_user, name='login'),
     path('logout/', logout_user, name='logout'),
+    path('edit-quran/<uuid:id>', edit_quran, name='edit_quran'),
+    path('delete/<uuid:id>', delete_quran, name='delete_quran'),
 ]

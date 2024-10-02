@@ -1,52 +1,39 @@
 {% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block meta %}
+<title>Ngaji Kuy - Toko Al-Quran Online</title>
+{% endblock meta %}
+
 {% block content %}
-<h1>Ngaji Kuy</h1>
+{% include 'navbar.html' %}
 
-<h5>Nama_Aplikasi: </h5>
-<p>{{ Nama_Aplikasi }}<p>
+<div class="container">
+    <div class="text-center mt-4 mb-4">
+        <h1>Selamat Datang di Ngaji Kuy</h1>
+        <p>Toko terpercaya untuk Al-Quran dan literatur Islami.</p>
+    </div>
 
-<h5>Name:</h5>
-<p>{{ name }}</p>
+    <div class="mb-4 text-right">
+        <a href="{% url 'main:create_quran_entry' %}" class="button">
+            Tambah Produk Al-Quran
+        </a>
+    </div>
 
-<h5>Class:</h5>
-<p>{{ class }}</p>
-
-{% if not quran_entries %}
-<p>Belum ada data pemesanan pada ngaji kuy.</p>
-{% else %}
-<table>
-  <tr>
-    <th>Nama Quran</th>
-    <th>Price</th>
-    <th>Description</th>
-    <th>Publisher</th>
-    <th>Stock</th>
-    <th>Type</th>
-  </tr>
-
- 
-  {% for quran_entry in quran_entries %}
-  <tr>
-    <td>{{quran_entry.name}}</td>
-    <td>{{quran_entry.price}}</td>
-    <td>{{quran_entry.description}}</td>
-    <td>{{quran_entry.publisher}}</td>
-    <td>{{quran_entry.stock}}</td>
-    <td>{{quran_entry.type}}</td>
-  </tr>
-  {% endfor %}
-</table>
-{% endif %}
-
-<br />
-
-<a href="{% url 'main:create_quran' %}">
-  <button>Add New Quran</button>
-</a>
-
-<a href="{% url 'main:logout' %}">
-  <button>Logout</button>
-</a>
-<h5>Sesi terakhir login: {{ last_login }}</h5>
-
+    {% if not quran_entries %}
+    <div class="text-center mt-4">
+        <img src="{% static 'image/sedih-banget.png' %}" alt="Sad face" class="w-32 h-32 mb-4"/>
+        <p>Saat ini, belum ada produk Al-Quran yang tersedia.</p>
+    </div>
+    {% else %}
+    <div class="columns">
+        {% for quran_entry in quran_entries %}
+        <div class="column">
+            {% include 'card_quran.html' with quran_entry=quran_entry %}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
 {% endblock content %}

@@ -109,12 +109,12 @@ Kelas : PBP C
 
 ## Tugas 3
 
-### Jelaskan mengapa kita memerlukan data delivery dalam pengimplementasian sebuah platform?
+### 1. Jelaskan mengapa kita memerlukan data delivery dalam pengimplementasian sebuah platform?
 
 Data delivery telah menjadi tulang punggung yang dibutuhkan dalam pengimplementasian sebuah platform. Fungsinya sebagai penghubung yang memungkinkan berbagai komponen di dalam platform berinteraksi secara efisien dan harmonis, baik antara server dan klien maupun antar elemen seperti database dan user interface. Proses pengiriman data yang teratur, aman, dan tepat waktu menjamin kinerja platform berjalan sesuai harapan, menghindari isolasi antar elemen yang dapat mengganggu fungsionalitas. Selain itu, strategi data delivery yang tepat dapat meningkatkan skalabilitas platform, memungkinkannya untuk beradaptasi dengan perubahan kebutuhan dan mengatasi lonjakan beban data dengan cepat dan efisien.
 
 
-### Menurutmu, mana yang lebih baik antara XML dan JSON? Mengapa JSON lebih populer dibandingkan XML?
+### 2. Menurutmu, mana yang lebih baik antara XML dan JSON? Mengapa JSON lebih populer dibandingkan XML?
 
 - Lebih Ringkas: JSON menggunakan sintaks yang lebih sederhana dan lebih sedikit karakter dibandingkan XML, sehingga lebih cepat dikirim dan diproses.
 
@@ -126,12 +126,12 @@ Data delivery telah menjadi tulang punggung yang dibutuhkan dalam pengimplementa
 
 - Populer di API Modern: Banyak API dan aplikasi web serta mobile menggunakan JSON karena kompatibilitas dan kecepatan yang lebih baik.
 
-### Jelaskan fungsi dari method `is_valid()` pada form Django dan mengapa kita membutuhkan method tersebut
+### 3. Jelaskan fungsi dari method `is_valid()` pada form Django dan mengapa kita membutuhkan method tersebut
 
 
 Method `is_valid()` sangat penting dalam proses validasi data yang dimasukkan oleh pengguna pada form Django. Fungsinya adalah untuk memeriksa apakah data yang dikirimkan melalui form sudah sesuai dengan aturan validasi yang telah ditentukan, seperti apakah semua field wajib telah diisi, apakah format data benar, atau apakah data memenuhi batasan tertentu. Jika semua data valid, method ini akan mengembalikan `True`, dan jika ada yang tidak valid, akan mengembalikan `False`. Selain itu, jika terjadi kegagalan validasi, Django akan secara otomatis mengisi dictionary form.errors dengan pesan kesalahan untuk setiap field yang bermasalah. Method ini juga berperan penting dalam mencegah masuknya data yang tidak valid atau berbahaya, melindungi aplikasi dari bug dan potensi ancaman keamanan.
 
-### Mengapa kita membutuhkan `csrf_token` saat membuat form di Django? Apa yang dapat terjadi jika kita tidak menambahkan `csrf_token` pada form Django? Bagaimana hal tersebut dapat dimanfaatkan oleh penyerang?
+### 4. Mengapa kita membutuhkan `csrf_token` saat membuat form di Django? Apa yang dapat terjadi jika kita tidak menambahkan `csrf_token` pada form Django? Bagaimana hal tersebut dapat dimanfaatkan oleh penyerang?
 
 CSRF token (Cross-Site Request Forgery token) diperlukan saat membuat form di Django untuk melindungi aplikasi dari serangan CSRF. CSRF adalah jenis serangan di mana penyerang mencoba mengirim permintaan yang tidak sah atas nama pengguna yang telah diautentikasi di situs web. Token ini memastikan bahwa setiap permintaan yang dikirimkan oleh pengguna melalui form memang berasal dari sumber yang sah (situs web itu sendiri) dan bukan dari pihak eksternal.
 
@@ -139,7 +139,7 @@ Jika kita tidak menambahkan csrf_token pada form, aplikasi menjadi rentan terhad
 
 Dengan menambahkan csrf_token, Django memastikan bahwa setiap permintaan form hanya bisa dijalankan jika token tersebut valid, sehingga melindungi aplikasi dari serangan yang mencoba memanfaatkan CSRF.
 
-### Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
+### 5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial).
 
 1. Membuat `base.html` untuk menjadi page utama dalam website
     ```python
@@ -353,7 +353,7 @@ Kelas : PBP D
 
 ## Tugas 4
 
-## Jawaban Pertanyaan
+
 ### 1. Apa perbedaan antara HttpResponseRedirect() dan redirect()?
 `HttpResponseRedirect()` membutuhkan URL lengkap sebagai argumen, sedangkan `redirect()` lebih fleksibel, bisa menerima nama view atau model dan otomatis mengarahkan ke URL yang benar.
 
@@ -494,7 +494,7 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'husin-hidayatul-ngajikuy.pbp.cs.ui.a
 ```
 
 
-## Tugas 4: Menjawab Pertanyaan Seputar CSS dan Responsive Design
+## Tugas 5
 
 ### 1. Urutan Prioritas CSS Selector
 
@@ -623,3 +623,132 @@ Untuk membuat navbar yang responsif terhadap berbagai ukuran perangkat, terutama
 2. **Responsivitas:** Saya menambahkan kelas-kelas Tailwind untuk menampilkan tampilan yang berbeda pada perangkat mobile dengan menggunakan `<div class="mobile-menu hidden ...>`. Ini memastikan navbar bisa berubah tampilan ketika dilihat dari perangkat mobile, sehingga tetap mudah digunakan di berbagai ukuran layar.
 
 ---
+
+
+
+## Tugas 6: Menjawab Pertanyaan Seputar CSS dan Responsive Design
+
+### 1. Jelaskan manfaat dari penggunaan JavaScript dalam pengembangan aplikasi web!
+
+
+
+1. **Interaktivitas yang Meningkat:** JavaScript memungkinkan pengembang untuk menambah elemen interaktif seperti animasi, pop-up, validasi formulir, dan pembaruan halaman secara real-time. Hal ini meningkatkan pengalaman pengguna secara keseluruhan dengan memberikan respon yang lebih cepat dan lebih baik terhadap aksi pengguna.
+
+2. **Penggunaan AJAX untuk Responsif yang Lebih Baik:** Dengan AJAX (Asynchronous JavaScript and XML), JavaScript memungkinkan pengiriman dan penerimaan data dari server tanpa perlu me-refresh halaman. Ini membuat aplikasi lebih responsif, karena pengguna dapat melihat perubahan langsung di halaman tanpa perlu menunggu reload penuh.
+
+3. **Kemampuan Manipulasi DOM (Document Object Model):** JavaScript dapat mengakses dan memanipulasi elemen HTML pada halaman web, sehingga memungkinkan pengembang untuk menambahkan, mengubah, atau menghapus elemen secara dinamis. Ini sangat berguna untuk membuat konten yang dapat diperbarui secara real-time berdasarkan tindakan pengguna.
+
+4. **Framework dan Library Modern:** JavaScript adalah dasar dari banyak framework modern seperti React, Angular, dan Vue, yang memungkinkan pengembangan aplikasi web yang lebih kompleks dengan struktur yang terorganisir. Framework ini menyediakan komponen siap pakai dan mempercepat pengembangan dengan fitur-fitur tambahan seperti routing, state management, dan integrasi API.
+
+5. **Kompatibilitas Lintas Platform:** JavaScript dapat dijalankan di berbagai browser dan perangkat, termasuk desktop, tablet, dan ponsel. Ini memungkinkan aplikasi yang ditulis dalam JavaScript untuk bekerja secara konsisten di berbagai platform tanpa perlu penyesuaian khusus.
+
+### 2. Jelaskan fungsi dari penggunaan `await` ketika kita menggunakan `fetch()`! Apa yang akan terjadi jika kita tidak menggunakan `await`?
+
+
+`await` digunakan untuk menunggu penyelesaian dari sebuah Promise sebelum melanjutkan eksekusi kode. Ketika `await` digunakan bersama dengan `fetch()`, ini memastikan bahwa aplikasi menunggu hingga respons dari server selesai sebelum melanjutkan ke langkah berikutnya.
+
+Jika kita tidak menggunakan `await`, `fetch()` akan mengembalikan Promise yang belum selesai, dan kode akan terus berjalan tanpa menunggu respons dari server. Ini dapat menyebabkan error, terutama jika ada bagian kode yang bergantung pada data yang diperoleh dari `fetch()`. Misalnya, mencoba mengakses data dari server yang belum tersedia bisa menyebabkan error karena objek tersebut masih kosong.
+
+
+### 3. Mengapa kita perlu menggunakan decorator `csrf_exempt` pada view yang akan digunakan untuk AJAX POST?
+
+
+Dalam Django, setiap permintaan POST membutuhkan CSRF token untuk mencegah serangan Cross-Site Request Forgery (CSRF). CSRF adalah serangan di mana pengguna yang sah dimanipulasi untuk mengirim permintaan ke server tanpa sepengetahuan mereka.
+
+Ketika kita mengirimkan permintaan AJAX POST, Django biasanya memerlukan CSRF token yang akan diverifikasi oleh server. Namun, untuk mempermudah pengembangan atau pengujian, kita dapat menonaktifkan pemeriksaan CSRF menggunakan decorator `csrf_exempt`.
+
+Decorator `csrf_exempt` memberi tahu Django untuk mengabaikan pemeriksaan CSRF pada view tertentu. Meski demikian, sangat disarankan untuk tetap menyertakan CSRF token dalam permintaan AJAX POST guna menjaga keamanan aplikasi. Pada aplikasi produksi, CSRF token biasanya ditambahkan dalam header permintaan secara manual.
+
+### 4. Pada tutorial PBP minggu ini, pembersihan data input pengguna dilakukan di belakang (backend) juga. Mengapa hal tersebut tidak dilakukan di frontend saja?
+
+
+Pembersihan data input pengguna di backend sangat penting untuk memastikan keamanan dan validitas data yang diterima. Meskipun validasi di frontend bermanfaat untuk memberikan umpan balik cepat kepada pengguna, validasi backend adalah keharusan karena:
+
+1. **Keamanan Data:** Validasi di frontend dapat dengan mudah diabaikan atau dimodifikasi oleh pengguna yang jahat, sehingga data yang tidak aman dapat dikirim ke server. Validasi di backend melindungi aplikasi dari serangan injeksi (seperti XSS dan SQL Injection) dengan memastikan data yang diterima aman.
+
+2. **Konsistensi Validasi:** Backend memiliki kontrol penuh atas semua data yang diterima oleh server, tanpa memperhatikan dari mana data tersebut dikirim. Validasi di backend memastikan bahwa aturan dan kebijakan validasi diterapkan secara seragam, baik data dikirim dari frontend atau sumber lain.
+
+3. **Menjaga Integritas Data:** Backend bertanggung jawab atas integritas data di database. Validasi backend membantu memastikan bahwa hanya data yang valid yang disimpan, sehingga mengurangi risiko kerusakan atau inkonsistensi data di dalam aplikasi.
+
+Karena alasan ini, validasi backend tetap diperlukan meskipun validasi frontend juga dilakukan.
+
+### 5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step (bukan hanya sekadar mengikuti tutorial)!
+
+
+#### 1. Menambahkan View untuk Menangani AJAX POST Request
+- **Fungsi `add_quran_entry_ajax` di `views.py`**: Menyimpan data Quran baru yang diterima dari permintaan POST dengan validasi.
+  ```python
+  @login_required
+  @require_POST
+  def add_quran_entry_ajax(request):
+      form = QuranForm(request.POST)
+      if form.is_valid():
+          quran_entry = form.save(commit=False)
+          quran_entry.user = request.user
+          quran_entry.save()
+          # Mengembalikan data dalam format JSON
+          return JsonResponse({'status': 'success'}, status=201)
+      else:
+          return JsonResponse({'status': 'error', 'errors': form.errors}, status=400)
+  ```
+
+#### 2. Memodifikasi Template `main.html` untuk Menggunakan AJAX GET
+- **Menghapus `quran_entries` dari Context**: Data tidak lagi dikirim dari server; AJAX GET akan digunakan untuk mengambil data.
+- **Menambahkan Script JavaScript untuk Mendapatkan Data dan Memperbarui Tampilan**:
+  ```javascript
+  async function getQuranEntries() {
+      const response = await fetch("{% url 'main:show_json' %}");
+      return response.json();
+  }
+  async function refreshQuranEntries() {
+      const data = await getQuranEntries();
+      // Proses dan tampilkan data di halaman
+  }
+  ```
+
+#### 3. Membuat Modal untuk Menambahkan Quran Baru dengan AJAX POST
+- **Menambahkan Tombol Modal dan Script untuk Membuka Modal**:
+  ```html
+  <button onclick="showModal()">Tambah Quran Baru</button>
+  <div id="crudModal" class="modal hidden">
+      <form id="quranEntryForm">
+          <!-- Form Inputs -->
+          <button type="submit">Simpan</button>
+      </form>
+  </div>
+  ```
+  ```javascript
+  function showModal() { document.getElementById('crudModal').classList.remove('hidden'); }
+  function hideModal() { document.getElementById('crudModal').classList.add('hidden'); }
+  ```
+
+#### 4. Mengimplementasikan Fungsi untuk Menambahkan Quran Baru Menggunakan AJAX POST
+- **Menambahkan Event Listener dan Fungsi untuk Submit Data**:
+  ```javascript
+  document.getElementById('quranEntryForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+      addQuranEntry();
+  });
+  function addQuranEntry() {
+      fetch("{% url 'main:add_quran_entry_ajax' %}", {
+          method: 'POST',
+          body: new FormData(document.getElementById('quranEntryForm'))
+      })
+      .then(response => response.json())
+      .then(data => {
+          if (data.status === 'success') { refreshQuranEntries(); hideModal(); }
+          else { alert('Error: ' + data.errors); }
+      });
+  }
+  ```
+
+#### 5. Pembersihan Data di Backend
+- **Menambahkan `strip_tags` di `forms.py` untuk Pembersihan Input**:
+  ```python
+  from django.utils.html import strip_tags
+  class QuranForm(forms.ModelForm):
+      def clean_name(self):
+          return strip_tags(self.cleaned_data["name"])
+  ```
+
+Dengan langkah-langkah ini, saya berhasil menerapkan AJAX GET dan POST, menjaga keamanan input, serta mengintegrasikan data secara asinkron tanpa perlu reload halaman.

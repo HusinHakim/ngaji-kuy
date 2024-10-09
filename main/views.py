@@ -12,21 +12,25 @@ from django.contrib.auth.decorators import login_required
 import datetime
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_POST
+from django.utils.html import strip_tags
+from django.http import JsonResponse
 
 
 @login_required(login_url='/login')
 def show_main(request): 
-    quran_entries = Quran.objects.filter(user=request.user)
+   
     context = {
         'Nama_Aplikasi' : "Ngaji Kuy",
         'name': request.user.username,
         'Class' : "PBP C",
-        'quran_entries': quran_entries,
+        
         'last_login': request.COOKIES['last_login'],
     }
 
     return render(request, "main.html", context)
-
+  
 def create_quran_entry(request):
     form = QuranForm(request.POST or None)
 
@@ -45,8 +49,9 @@ def show_xml(request):
 
 
 def show_json(request):
-    data = Quran.objects.all()
+    data = Quran.objects.filter(user=request.user)
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+
 
 def show_xml_by_id(request, id):
     data = Quran.objects.filter(pk=id)
@@ -112,3 +117,29 @@ def delete_quran(request, id):
     quran.delete()
     # Kembali ke halaman awal
     return HttpResponseRedirect(reverse('main:show_main'))
+
+
+@login_required
+@require_POST
+def add_quran_entry_ajax(request):
+    form = QuranForm(request.POST)
+    if form.is_valid():
+        quran_entry = form.save(commit=False)
+        quran_entry.user = request.user
+        quran_entry.save()
+        quran_data = {
+            'pk': str(quran_entry.id),
+            'fields': {
+                'name': quran_entry.name,
+                'price': quran_entry.price,
+                'description': quran_entry.description,
+                'stock': quran_entry.stock,
+                'publisher': quran_entry.publisher,
+                'type': quran_entry.type,
+            }
+        }
+        return JsonResponse(quran_data, status=201)
+    else:
+        errors = form.errors.get_json_data()
+        return JsonResponse({'error': errors}, status=400)
+

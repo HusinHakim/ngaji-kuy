@@ -16,7 +16,10 @@ from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from django.utils.html import strip_tags
 from django.http import JsonResponse
-
+import json
+from django.contrib.auth.models import User
+from django.contrib.auth.password_validation import validate_password
+from django.core.exceptions import ValidationError
 
 @login_required(login_url='/login')
 def show_main(request): 
@@ -61,33 +64,60 @@ def show_json_by_id(request, id):
     data = Quran.objects.filter(pk=id)
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
-def register(request):
-    form = UserCreationForm()
 
+
+def register(request):
     if request.method == "POST":
-        form = UserCreationForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Your account has been successfully created!')
-            return redirect('main:login')
-    context = {'form':form}
-    return render(request, 'register.html', context)
+        # Get form data
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        password1 = request.POST.get('password1')
+        password2 = request.POST.get('password2')
+
+        # Validate passwords match
+        if password1 != password2:
+            messages.error(request, 'Passwords do not match.')
+            return render(request, 'register.html')
+
+        # Validate password strength
+        try:
+            validate_password(password1)
+        except ValidationError as e:
+            for error in e:
+                messages.error(request, error)
+            return render(request, 'register.html')
+
+        # Check if username already exists
+        if User.objects.filter(username=username).exists():
+            messages.error(request, 'Username already exists.')
+            return render(request, 'register.html')
+
+        # Create user
+        user = User.objects.create_user(username=username, email=email, password=password1)
+        user.save()
+        messages.success(request, 'Your account has been successfully created!')
+        return redirect('main:login')
+
+    return render(request, 'register.html')
 
 def login_user(request):
-   if request.method == 'POST':
-      form = AuthenticationForm(data=request.POST)
+    if request.method == 'POST':
+        # Get the username and password from POST data
+        username = request.POST.get('username')
+        password = request.POST.get('password')
 
-      if form.is_valid():
-        user = form.get_user()
-        login(request, user)
-        response = HttpResponseRedirect(reverse("main:show_main"))
-        response.set_cookie('last_login', str(datetime.datetime.now()))
-        return response
+        # Authenticate the user
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            response = HttpResponseRedirect(reverse("main:show_main"))
+            response.set_cookie('last_login', str(datetime.datetime.now()))
+            return response
+        else:
+            messages.error(request, 'Invalid username or password.')
 
-   else:
-      form = AuthenticationForm(request)
-   context = {'form': form}
-   return render(request, 'login.html', context)
+    return render(request, 'login.html')
+
 
 def logout_user(request):
     logout(request)
@@ -143,3 +173,20 @@ def add_quran_entry_ajax(request):
         errors = form.errors.get_json_data()
         return JsonResponse({'error': errors}, status=400)
 
+@csrf_exempt
+def create_product_flutter(request):
+    if request.method == 'POST':
+
+        data = json.loads(request.body)
+        new_mood = Quran.objects.create(
+            user=request.user,
+            name=data["name"],
+            price=int(data["price"]),
+            description = data["description"],
+        )
+
+        new_mood.save()
+
+        return JsonResponse({"status": "success"}, status=200)
+    else:
+        return JsonResponse({"status": "error"}, status=401)

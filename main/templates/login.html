@@ -15,7 +15,7 @@
       {% csrf_token %}
       <div class="form-group">
         <label for="username">Username</label>
-        <input id="username" name="username" type="text" required placeholder="Username">
+        <input id="username" name="username" type="text" required placeholder="Username" value="{{ request.POST.username }}">
       </div>
       <div class="form-group">
         <label for="password">Password</label>

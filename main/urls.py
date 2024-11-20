@@ -5,6 +5,7 @@ from main.views import login_user
 from main.views import logout_user
 from main.views import edit_quran
 from main.views import delete_quran
+from main.views import create_product_flutter
 app_name = 'main'
 
 
@@ -21,5 +22,7 @@ urlpatterns = [
     path('edit-quran/<uuid:id>', edit_quran, name='edit_quran'),
     path('delete/<uuid:id>', delete_quran, name='delete_quran'),
     path('create-quran-entry-ajax', add_quran_entry_ajax, name='add_quran_entry_ajax'),
+    path('create-flutter/', create_product_flutter, name='create_product_flutter'),
+    
 
 ]
